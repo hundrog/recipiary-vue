@@ -62,5 +62,8 @@ function onSubmit() {
     <Button type="submit">
       Save changes
     </Button>
+    <Button type="button" variant="outline" v-if="ingredient.ID">
+      Delete
+    </Button>
   </form>
 </template>

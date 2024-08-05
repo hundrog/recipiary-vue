@@ -2,7 +2,7 @@ import { ofetch } from "ofetch"
 
 export const goFetch = (request: string, opts: object = {}) => {
   return ofetch(request, {
-    baseURL: 'http://localhost:8080',
+    baseURL: import.meta.env.VITE_API_URL,
     ...opts
   })
 }

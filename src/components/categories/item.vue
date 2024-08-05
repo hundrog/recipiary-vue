@@ -46,9 +46,6 @@ function openModal() {
           <CategoriesForm :category="category" />
         </template>
       </ResourcesUpsert>
-      <ResourcesDelete name="Category">
-        <CategoriesDelete :categoryID="category.ID" />
-      </ResourcesDelete>
     </div>
   </div>
 </template>

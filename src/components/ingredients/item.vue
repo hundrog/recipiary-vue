@@ -44,9 +44,6 @@ function openModal() {
           <IngredientsForm :ingredient="ingredient" />
         </template>
       </ResourcesUpsert>
-      <ResourcesDelete name="ingredient">
-        <!-- <CategoriesDelete :ingredientID="ingredient.ID" /> -->
-      </ResourcesDelete>
     </div>
   </div>
 </template>
