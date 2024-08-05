@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useDialogStore } from '@/stores/dialog'
 import { useCategoryStore } from '@/stores/category'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import ResourcesUpsert from '@/components/resources/upsert.vue'
 import CategoriesList from '@/components/categories/list.vue'
 import CategoriesForm from '@/components/categories/form.vue'

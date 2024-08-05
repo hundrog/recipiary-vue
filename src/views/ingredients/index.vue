@@ -2,13 +2,20 @@
 import { useDialogStore } from '@/stores/dialog'
 import { useIngredientStore } from '@/stores/ingredient'
 import { useCategoryStore } from '@/stores/category'
+import { onMounted } from 'vue'
+import ResourcesUpsert from '@/components/resources/upsert.vue'
+import IngredientsList from '@/components/ingredients/list.vue'
+import IngredientsForm from '@/components/ingredients/form.vue'
+import { Button } from '@/components/ui/button'
 
 const dialog = useDialogStore()
 const ingredientStore = useIngredientStore()
 const categoryStore = useCategoryStore()
 
-await ingredientStore.list()
-await categoryStore.list()
+onMounted(async () => {
+  await ingredientStore.list()
+  await categoryStore.list()
+})
 
 function openModal() {
   dialog.open()
