@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import { goFetch } from '@/composables/goFetch'
 
 export interface Ingredient {
   ID?: number,
