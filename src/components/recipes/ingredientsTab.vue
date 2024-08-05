@@ -1,6 +1,19 @@
 <script setup lang="ts">
 import { CircleX, CirclePlus, Pencil } from 'lucide-vue-next'
+import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import ResourcesUpsert from '@/components/resources/upsert.vue'
+import RecipesIngredientsForm from './ingredientsForm.vue'
 import { useRecipeIngredientStore } from '@/stores/recipeIngredient'
+import { useDialogStore } from '@/stores/dialog'
+import { ref, toRef } from 'vue'
 
 const recipeIngredientStore = useRecipeIngredientStore()
 const dialog = useDialogStore()

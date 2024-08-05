@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const props = defineProps(["recipes"])
+import RecipesItem from './item.vue'
 </script>
 
 <template>

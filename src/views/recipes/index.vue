@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { useRecipeStore } from '@/stores/recipe'
+import { onMounted } from 'vue'
+import RecipesList from '@/components/recipes/list.vue'
+import { Button } from '@/components/ui/button'
 
 const recipeStore = useRecipeStore()
-await recipeStore.list()
+onMounted(async () => {
+  await recipeStore.list()
+})
 </script>
 
 <template>

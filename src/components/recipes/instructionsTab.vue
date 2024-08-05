@@ -1,7 +1,22 @@
 <script setup lang="ts">
 import draggable from 'vuedraggable'
 import { Grip, CirclePlus, Pencil } from 'lucide-vue-next'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
+import ResourcesUpsert from '@/components/resources/upsert.vue'
+import RecipesInstructionsForm from './instructionsForm.vue'
 import { useInstructionStore } from '@/stores/instruction'
+import { useDialogStore } from '@/stores/dialog'
+import { useRoute } from 'vue-router'
+import { ref, toRef } from 'vue'
 
 const instructionStore = useInstructionStore()
 const dialog = useDialogStore()

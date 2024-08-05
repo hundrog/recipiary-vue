@@ -5,19 +5,15 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
 definePageMeta({
-  layout: "blank"
+  layout: 'blank'
 })
 </script>
 
 <template>
   <Card class="mx-auto max-w-sm">
     <CardHeader>
-      <CardTitle class="text-2xl">
-        Login
-      </CardTitle>
-      <CardDescription>
-        Enter your email below to login to your account
-      </CardDescription>
+      <CardTitle class="text-2xl"> Login </CardTitle>
+      <CardDescription> Enter your email below to login to your account </CardDescription>
     </CardHeader>
     <CardContent>
       <div class="grid gap-4">
@@ -28,24 +24,18 @@ definePageMeta({
         <div class="grid gap-2">
           <div class="flex items-center">
             <Label for="password">Password</Label>
-            <NuxtLink to="#" class="ml-auto inline-block text-sm underline">
+            <RouterLink to="#" class="ml-auto inline-block text-sm underline">
               Forgot your password?
-            </NuxtLink>
+            </RouterLink>
           </div>
           <Input id="password" type="password" required />
         </div>
-        <Button type="submit" class="w-full">
-          Login
-        </Button>
-        <Button variant="outline" class="w-full">
-          Login with Google
-        </Button>
+        <Button type="submit" class="w-full"> Login </Button>
+        <Button variant="outline" class="w-full"> Login with Google </Button>
       </div>
       <div class="mt-4 text-center text-sm">
         Don't have an account?
-        <NuxtLink to="#" class="underline">
-          Sign up
-        </NuxtLink>
+        <RouterLink to="#" class="underline"> Sign up </RouterLink>
       </div>
     </CardContent>
   </Card>

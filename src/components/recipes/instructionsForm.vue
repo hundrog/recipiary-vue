@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
+import { useDialogStore } from '@/stores/dialog'
+import { useInstructionStore } from '@/stores/instruction'
+import { ref, toRef } from 'vue'
+import { Button } from '@/components/ui/button'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
+
 const props = defineProps({
   instruction: Object as PropType<Instruction>,
   editing: Boolean,

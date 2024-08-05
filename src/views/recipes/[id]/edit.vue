@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted, toRef } from 'vue'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -20,6 +21,11 @@ import { useRecipeStore } from '@/stores/recipe'
 import { useInstructionStore } from '@/stores/instruction'
 import { useIngredientStore } from '@/stores/ingredient'
 import { useRecipeIngredientStore } from '@/stores/recipeIngredient'
+import { useRoute } from 'vue-router'
+import RecipesIngredientsTab from '@/components/recipes/ingredientsTab.vue'
+import RecipesInstructionsTab from '@/components/recipes/instructionsTab.vue'
+import RecipesForm from '@/components/recipes/form.vue'
+import LayoutBackButton from '@/components/layout/backButton.vue'
 
 const route = useRoute()
 const recipeStore = useRecipeStore()
@@ -27,10 +33,12 @@ const recipeIngredientStore = useRecipeIngredientStore()
 const instructionStore = useInstructionStore()
 const ingredientStore = useIngredientStore()
 
-await recipeStore.get(route.params.id)
-await recipeIngredientStore.list(route.params.id)
-await instructionStore.list(route.params.id)
-await ingredientStore.list()
+onMounted(async () => {
+  await recipeStore.get(route.params.id)
+  await recipeIngredientStore.list(route.params.id)
+  await instructionStore.list(route.params.id)
+  await ingredientStore.list()
+})
 
 const recipe = toRef(recipeStore.recipe)
 const recipeIngredients = toRef(recipeIngredientStore.recipeIngredients)

@@ -1,22 +1,22 @@
 <script setup lang="ts">
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
-const props = defineProps(["recipe"])
+const props = defineProps(['recipe'])
 </script>
 
 <template>
   <Card class="">
     <CardHeader>
-      <NuxtImg class="mb-2"
-        src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=1913&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+      <img class="mb-2" :src="recipe.ImageUrl" />
       <CardTitle>{{ recipe.Name }}</CardTitle>
       <CardDescription>{{ recipe.Description }}</CardDescription>
     </CardHeader>
@@ -27,7 +27,7 @@ const props = defineProps(["recipe"])
     </CardContent>
     <CardFooter class="justify-end space-x-4">
       <Button as-child>
-        <NuxtLink :to="`/recipes/${recipe.ID}`">Details</NuxtLink>
+        <RouterLink :to="`/recipes/${recipe.ID}`">Details</RouterLink>
       </Button>
     </CardFooter>
   </Card>

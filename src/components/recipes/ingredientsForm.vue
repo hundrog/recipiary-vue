@@ -1,8 +1,22 @@
 <script setup lang="ts">
 import { CircleMinus, CircleCheck } from 'lucide-vue-next'
 import { useRecipeIngredientStore } from '@/stores/recipeIngredient'
-import { useIngredientStore } from '@/stores/ingredient'
-import type { Ingredient } from '@/stores/ingredient'
+import { useIngredientStore, type Ingredient } from '@/stores/ingredient'
+import { useDialogStore } from '@/stores/dialog'
+import { useRoute } from 'vue-router'
+import { ref, toRef } from 'vue'
+import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
+import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 const recipeIngredientStore = useRecipeIngredientStore()
 const ingredientStore = useIngredientStore()
