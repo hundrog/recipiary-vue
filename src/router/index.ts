@@ -25,7 +25,7 @@ const router = createRouter({
     {
       path: '/ingredients',
       name: 'ingredients',
-      component: () => import('../views/HomeView.vue')
+      component: () => import('../views/ingredients/index.vue')
     },
     {
       path: '/recipes',

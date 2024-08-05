@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const props = defineProps(["ingredient"])
-
+import ResourcesDelete from '@/components/resources/delete.vue'
+import ResourcesUpsert from '@/components/resources/upsert.vue'
+import IngredientsForm from './form.vue'
 import {
   Card,
   CardContent,

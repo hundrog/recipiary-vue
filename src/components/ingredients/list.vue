@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IngredientsItem from './item.vue'
 const props = defineProps(["ingredients"])
 </script>
 

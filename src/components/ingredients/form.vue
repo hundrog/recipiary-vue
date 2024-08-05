@@ -14,6 +14,7 @@ import {
 import { useDialogStore } from '@/stores/dialog'
 import { useCategoryStore } from '@/stores/category'
 import { useIngredientStore } from '@/stores/ingredient'
+import { ref } from 'vue'
 
 const dialog = useDialogStore()
 const categoryStore = useCategoryStore()
