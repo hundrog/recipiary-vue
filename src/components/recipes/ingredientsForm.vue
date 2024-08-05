@@ -86,8 +86,8 @@ function handleChange(item) {
     <Button type="submit">
       Save
     </Button>
-    <Button variant="destructive" type="button" @click="remove(ingredient)" v-if="ingredient.ID">
-      Remove
+    <Button variant="outline" type="button" @click="remove(ingredient)" v-if="ingredient.ID">
+      Delete
     </Button>
   </form>
 </template>
