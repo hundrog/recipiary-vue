@@ -1,4 +1,4 @@
-import { ofetch } from "ofetch"
+import { ofetch } from 'ofetch'
 
 export const goFetch = (request: string, opts: object = {}) => {
   return ofetch(request, {

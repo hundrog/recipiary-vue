@@ -10,7 +10,7 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-  SelectValue,
+  SelectValue
 } from '@/components/ui/select'
 import { useDialogStore } from '@/stores/dialog'
 import { useCategoryStore } from '@/stores/category'
@@ -18,8 +18,31 @@ import { useCategoryStore } from '@/stores/category'
 const dialog = useDialogStore()
 const categoryStore = useCategoryStore()
 
-const props = defineProps(["category"])
-const colors = ["slate", "gray", "zinc", "neutral", "stone", "red", "orange", "amber", "yellow", "lime", "green", "emerald", "teal", "cyan", "sky", "blue", "indigo", "violet", "purple", "fuchsia", "pink", "rose"]
+const props = defineProps(['category'])
+const colors = [
+  'slate',
+  'gray',
+  'zinc',
+  'neutral',
+  'stone',
+  'red',
+  'orange',
+  'amber',
+  'yellow',
+  'lime',
+  'green',
+  'emerald',
+  'teal',
+  'cyan',
+  'sky',
+  'blue',
+  'indigo',
+  'violet',
+  'purple',
+  'fuchsia',
+  'pink',
+  'rose'
+]
 
 const name = ref()
 const color = ref()
@@ -60,11 +83,7 @@ function onSubmit() {
         </SelectContent>
       </Select>
     </div>
-    <Button type="submit">
-      Save changes
-    </Button>
-    <Button type="button" variant="outline" v-if="category.ID">
-      Delete
-    </Button>
+    <Button type="submit"> Save changes </Button>
+    <Button type="button" variant="outline" v-if="category.ID"> Delete </Button>
   </form>
 </template>

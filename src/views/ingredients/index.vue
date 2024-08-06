@@ -24,15 +24,14 @@ function openModal() {
 
 <template>
   <div class="flex items-center justify-between">
-    <h1 class="text-lg font-semibold md:text-2xl">
-      Ingredients
-    </h1>
-    <ResourcesUpsert title="New Ingredient" description="Create your new ingredient here. Click save when you're done."
-      v-if="ingredientStore.ingredients">
+    <h1 class="text-lg font-semibold md:text-2xl">Ingredients</h1>
+    <ResourcesUpsert
+      title="New Ingredient"
+      description="Create your new ingredient here. Click save when you're done."
+      v-if="ingredientStore.ingredients"
+    >
       <template #trigger>
-        <Button @click="openModal">
-          Add Ingredient
-        </Button>
+        <Button @click="openModal"> Add Ingredient </Button>
       </template>
       <template #content>
         <IngredientsForm :ingredient="{}" />
@@ -42,17 +41,18 @@ function openModal() {
   <div v-if="ingredientStore.ingredients">
     <IngredientsList :ingredients="ingredientStore.ingredients" />
   </div>
-  <div class="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm" v-else>
+  <div
+    class="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
+    v-else
+  >
     <div class="flex flex-col items-center gap-1 text-center">
-      <h3 class="text-2xl font-bold tracking-tight">
-        You have no ingredients
-      </h3>
-      <ResourcesUpsert title="New Ingredient"
-        description="Create your new ingredient here. Click save when you're done.">
+      <h3 class="text-2xl font-bold tracking-tight">You have no ingredients</h3>
+      <ResourcesUpsert
+        title="New Ingredient"
+        description="Create your new ingredient here. Click save when you're done."
+      >
         <template #trigger>
-          <Button @click="openModal" class="mt-4">
-            Add Ingredient
-          </Button>
+          <Button @click="openModal" class="mt-4"> Add Ingredient </Button>
         </template>
         <template #content>
           <IngredientsForm :ingredient="{}" />

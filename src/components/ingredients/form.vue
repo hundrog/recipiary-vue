@@ -9,7 +9,7 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-  SelectValue,
+  SelectValue
 } from '@/components/ui/select'
 import { useDialogStore } from '@/stores/dialog'
 import { useCategoryStore } from '@/stores/category'
@@ -19,7 +19,7 @@ import { ref } from 'vue'
 const dialog = useDialogStore()
 const categoryStore = useCategoryStore()
 const ingredientStore = useIngredientStore()
-const props = defineProps(["ingredient"])
+const props = defineProps(['ingredient'])
 const name = ref()
 const categoryId = ref()
 
@@ -49,7 +49,11 @@ function onSubmit() {
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Category</SelectLabel>
-            <SelectItem v-for="category in categoryStore.categories" :value="category.ID" :key="category.ID">
+            <SelectItem
+              v-for="category in categoryStore.categories"
+              :value="category.ID"
+              :key="category.ID"
+            >
               <div class="flex">
                 <div class="px-6 py-2 mx-2 rounded-md" :class="[`bg-${category.Color}-400`]"></div>
                 {{ category.Name }}
@@ -59,11 +63,7 @@ function onSubmit() {
         </SelectContent>
       </Select>
     </div>
-    <Button type="submit">
-      Save changes
-    </Button>
-    <Button type="button" variant="outline" v-if="ingredient.ID">
-      Delete
-    </Button>
+    <Button type="submit"> Save changes </Button>
+    <Button type="button" variant="outline" v-if="ingredient.ID"> Delete </Button>
   </form>
 </template>

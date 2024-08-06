@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button'
 
-const props = defineProps(["categoryID"])
+const props = defineProps(['categoryID'])
 function remove() {
-  console.log("Deleting category", props.categoryID)
+  console.log('Deleting category', props.categoryID)
 }
 </script>
 

@@ -8,7 +8,7 @@ const colorMode = useColorMode()
 const checked = ref(colorMode.value == 'dark')
 
 function handleChange(val) {
-  val ? colorMode.value = 'dark' : colorMode.value = 'light'
+  val ? (colorMode.value = 'dark') : (colorMode.value = 'light')
 }
 </script>
 

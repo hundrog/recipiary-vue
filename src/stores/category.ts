@@ -3,8 +3,8 @@ import { defineStore } from 'pinia'
 import { goFetch } from '@/composables/goFetch'
 
 export interface Category {
-  ID?: number,
-  Name?: string,
+  ID?: number
+  Name?: string
   Color?: string
 }
 

@@ -7,7 +7,7 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -37,7 +37,10 @@ function onSubmit() {
         <CardDescription> </CardDescription>
       </CardHeader>
       <CardContent class="space-y-2">
-        <img class="mb-4 w-full sm:max-w-xl" src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d" />
+        <img
+          class="mb-4 w-full sm:max-w-xl"
+          src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"
+        />
         <div class="space-y-1">
           <Label for="name">Name</Label>
           <Input id="name" :default-value="recipe.Name" v-model="name" />
