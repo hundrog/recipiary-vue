@@ -1,12 +1,5 @@
 <script setup lang="ts">
 import { Home, Package, Package2, Waypoints, BookHeart } from 'lucide-vue-next'
-import { useRoute } from 'vue-router'
-const route = useRoute()
-const currentRoute = (path: string) => {
-  return (route.path.includes(path) && path.length > 1) || route.path === path
-    ? 'bg-muted text-primary hover:text-primary'
-    : 'text-muted-foreground'
-}
 </script>
 
 <template>
@@ -15,35 +8,25 @@ const currentRoute = (path: string) => {
       <Package2 class="h-6 w-6" />
       <span class="">Meal Planner</span>
     </RouterLink>
-    <RouterLink
-      to="/"
-      class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground"
-      :class="[currentRoute('/')]"
-    >
+    <RouterLink to="/" class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground"
+      activeClass="bg-muted text-primary hover:text-primary">
       <Home class="h-5 w-5" />
       Dashboard
     </RouterLink>
-    <RouterLink
-      to="/categories"
+    <RouterLink to="/categories"
       class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground"
-      :class="[currentRoute('categories')]"
-    >
+      activeClass="bg-muted text-primary hover:text-primary">
       <Waypoints class="h-5 w-5" />
       Categories
     </RouterLink>
-    <RouterLink
-      to="/ingredients"
+    <RouterLink to="/ingredients"
       class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground"
-      :class="[currentRoute('ingredients')]"
-    >
+      activeClass="bg-muted text-primary hover:text-primary">
       <Package class="h-5 w-5" />
       Ingredients
     </RouterLink>
-    <RouterLink
-      to="/recipes"
-      class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground"
-      :class="[currentRoute('recipes')]"
-    >
+    <RouterLink to="/recipes" class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground"
+      activeClass="bg-muted text-primary hover:text-primary">
       <BookHeart class="h-5 w-5" />
       Recipes
     </RouterLink>
