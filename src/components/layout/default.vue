@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { Drumstick, Bell, CircleUser, Menu, Package2, Search } from 'lucide-vue-next'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { Moon, Sun, Drumstick, Bell, CircleUser, Menu, Package2, Search } from 'lucide-vue-next'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -19,11 +21,18 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
+import { Switch } from '@/components/ui/switch'
+import { useColorMode } from '@vueuse/core'
 import LayoutNavLinks from './navLinks.vue'
-import LayoutDarkMode from './darkMode.vue'
 
-const logout = () => {
-  return navigateTo('/login')
+const router = useRouter()
+const colorMode = useColorMode()
+const checked = ref(colorMode.value == 'dark')
+
+const logout = () => router.push('/login')
+
+function handleChange(val) {
+  val ? (colorMode.value = 'dark') : (colorMode.value = 'light')
 }
 </script>
 
@@ -65,11 +74,8 @@ const logout = () => {
           <form>
             <div class="relative">
               <Search class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search for recipes"
-                class="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
-              />
+              <Input type="search" placeholder="Search for recipes"
+                class="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3" />
             </div>
           </form>
         </div>
@@ -85,7 +91,10 @@ const logout = () => {
             <DropdownMenuSeparator />
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuItem>Support</DropdownMenuItem>
-            <LayoutDarkMode />
+            <div class="flex space-x-2 px-2 py-2">
+              <Switch @update:checked="handleChange" :defaultChecked="checked" />
+              <Moon class="size-4" />
+            </div>
             <DropdownMenuSeparator />
             <DropdownMenuItem @click="logout">Logout</DropdownMenuItem>
           </DropdownMenuContent>
