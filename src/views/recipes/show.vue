@@ -3,7 +3,7 @@ import { useRecipeStore } from '@/stores/recipe'
 import { useInstructionStore } from '@/stores/instruction'
 import { useRecipeIngredientStore } from '@/stores/recipeIngredient'
 import { Separator } from '@/components/ui/separator'
-import { onMounted, toRef, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import {
   Card,
@@ -14,6 +14,7 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Blend } from 'lucide-vue-next'
 import LayoutBackButton from '@/components/layout/backButton.vue'
 
 const route = useRoute()
@@ -21,9 +22,9 @@ const recipeStore = useRecipeStore()
 const recipeIngredientStore = useRecipeIngredientStore()
 const instructionStore = useInstructionStore()
 
-const recipe = toRef(recipeStore.recipe)
-const recipeIngredients = toRef(recipeIngredientStore.recipeIngredients)
-const instructions = toRef(instructionStore.instructions)
+const recipe = ref({})
+const recipeIngredients = ref([])
+const instructions = ref([])
 
 onMounted(async () => {
   await recipeStore.get(route.params.id)
@@ -37,7 +38,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="mx-auto max-w-screen-2xl">
+  <div class="mx-auto max-w-screen-2xl" v-if="recipe.ID">
     <LayoutBackButton route="/recipes" justify="end" />
     <Card>
       <CardHeader class="flex flex-col">
