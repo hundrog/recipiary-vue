@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Index from '../views/index.vue'
-import path from 'path'
+import Login from '../views/login.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,6 +9,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Index
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/about',
@@ -47,11 +52,6 @@ const router = createRouter({
           component: () => import('../views/recipes/edit.vue')
         },
       ]
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import('../views/login.vue')
     },
   ]
 })
