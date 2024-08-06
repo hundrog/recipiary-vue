@@ -1,13 +1,13 @@
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import { goFetch } from '@/composables/goFetch'
 
 export interface RecipeIngredient {
-  ID?: number,
-  Name?: string,
-  Portion?: string,
-  Amount?: number,
-  RecipeId?: number,
+  ID?: number
+  Name?: string
+  Portion?: string
+  Amount?: number
+  RecipeId?: number
 }
 
 export const useRecipeIngredientStore = defineStore('recipeIngredient', () => {
@@ -34,13 +34,15 @@ export const useRecipeIngredientStore = defineStore('recipeIngredient', () => {
       body: ingredient
     })
 
-    const indexOf = recipeIngredients.value.findIndex((el: RecipeIngredient) => el.ID == ingredient.ID)
+    const indexOf = recipeIngredients.value.findIndex(
+      (el: RecipeIngredient) => el.ID == ingredient.ID
+    )
     recipeIngredients.value[indexOf] = data as RecipeIngredient
   }
 
   async function remove(ingredient: RecipeIngredient) {
     await goFetch(`/recipes/${ingredient.RecipeId}/ingredients/${ingredient.ID}`, {
-      method: 'DELETE',
+      method: 'DELETE'
     })
 
     recipeIngredients.value = recipeIngredients.value.filter((el) => {

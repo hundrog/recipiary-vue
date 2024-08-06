@@ -1,16 +1,16 @@
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import { goFetch } from '@/composables/goFetch'
 
 export interface Instruction {
-  ID?: number,
-  Content?: string,
+  ID?: number
+  Content?: string
   RecipeId?: number
   Position?: number
 }
 
 interface updatePosition {
-  RecipeId?: number,
+  RecipeId?: number
   Updates: Instruction[]
 }
 
@@ -55,7 +55,7 @@ export const useInstructionStore = defineStore('instruction', () => {
 
   async function remove(instruction: Instruction) {
     await goFetch(`/recipes/${instruction.RecipeId}/instructions/${instruction.ID}`, {
-      method: 'DELETE',
+      method: 'DELETE'
     })
 
     instructions.value = instructions.value.filter((el) => el.ID != instruction.ID)

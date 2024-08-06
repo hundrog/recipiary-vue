@@ -1,22 +1,6 @@
 <script setup lang="ts">
 import { onMounted, toRef } from 'vue'
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/components/ui/tabs'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useRecipeStore } from '@/stores/recipe'
 import { useInstructionStore } from '@/stores/instruction'
 import { useIngredientStore } from '@/stores/ingredient'
@@ -41,8 +25,6 @@ onMounted(async () => {
 })
 
 const recipe = toRef(recipeStore.recipe)
-const recipeIngredients = toRef(recipeIngredientStore.recipeIngredients)
-const instructions = toRef(instructionStore.instructions)
 </script>
 
 <template>
@@ -50,15 +32,9 @@ const instructions = toRef(instructionStore.instructions)
     <LayoutBackButton :route="`/recipes/${route.params.id}`" justify="end" />
     <Tabs default-value="recipe">
       <TabsList class="grid w-full grid-cols-3">
-        <TabsTrigger value="recipe">
-          Recipe
-        </TabsTrigger>
-        <TabsTrigger value="ingredients">
-          Ingredients
-        </TabsTrigger>
-        <TabsTrigger value="instructions">
-          Instructions
-        </TabsTrigger>
+        <TabsTrigger value="recipe"> Recipe </TabsTrigger>
+        <TabsTrigger value="ingredients"> Ingredients </TabsTrigger>
+        <TabsTrigger value="instructions"> Instructions </TabsTrigger>
       </TabsList>
       <TabsContent value="recipe">
         <RecipesForm :recipe="recipe" />

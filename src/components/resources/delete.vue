@@ -8,11 +8,11 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
+  AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { Trash } from 'lucide-vue-next'
-const props = defineProps(["name"])
+defineProps(['name'])
 </script>
 
 <template>

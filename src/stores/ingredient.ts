@@ -1,11 +1,12 @@
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import { goFetch } from '@/composables/goFetch'
 
 export interface Ingredient {
-  ID?: number,
-  Name?: string,
-  CategoryId?: number,
+  ID?: number
+  Name?: string
+  CategoryId?: number
+  Portion?: string
 }
 
 export const useIngredientStore = defineStore('ingredient', () => {

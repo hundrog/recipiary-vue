@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import draggable from 'vuedraggable'
 import { Grip, CirclePlus, Pencil } from 'lucide-vue-next'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import ResourcesUpsert from '@/components/resources/upsert.vue'
@@ -45,8 +38,10 @@ function saveOrder() {
     <CardHeader>
       <div class="flex justify-between items-center">
         <CardTitle>Instructions</CardTitle>
-        <ResourcesUpsert title="New Instruction"
-          description="Add the new instruction here. Click save when you're done.">
+        <ResourcesUpsert
+          title="New Instruction"
+          description="Add the new instruction here. Click save when you're done."
+        >
           <template #trigger>
             <Button class="text-green-700 hover:text-green-500" variant="ghost" size="icon">
               <CirclePlus />
@@ -60,8 +55,14 @@ function saveOrder() {
     </CardHeader>
     <CardContent>
       <Separator class="my-4" v-if="adding" />
-      <draggable v-model="instructions" @start="drag = true" @end="drag = false" item-key="id" handle=".handle"
-        class="space-y-2">
+      <draggable
+        v-model="instructions"
+        @start="drag = true"
+        @end="drag = false"
+        item-key="id"
+        handle=".handle"
+        class="space-y-2"
+      >
         <template #item="{ element }">
           <div class="flex flex-row items-center gap-1 handle">
             <Button variant="outline" size="icon" as="div" class="cursor-grab">
@@ -72,8 +73,10 @@ function saveOrder() {
                 <div class="basis-4/5">
                   {{ element.Content }}
                 </div>
-                <ResourcesUpsert title="Edit Instruction"
-                  description="Make changes to the instruction here. Click save when you're done.">
+                <ResourcesUpsert
+                  title="Edit Instruction"
+                  description="Make changes to the instruction here. Click save when you're done."
+                >
                   <template #trigger>
                     <Button variant="outline" size="icon" @click="dialog.open()">
                       <Pencil class="size-4" />

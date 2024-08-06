@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { createReusableTemplate, useMediaQuery } from '@vueuse/core'
+import { useMediaQuery } from '@vueuse/core'
 import { ref, watch } from 'vue'
 import { Button } from '@/components/ui/button'
 import {
@@ -8,7 +8,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from '@/components/ui/dialog'
 import {
   Drawer,
@@ -18,23 +18,23 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
+  DrawerTrigger
 } from '@/components/ui/drawer'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
-import { Pencil } from 'lucide-vue-next'
 import { useDialogStore } from '@/stores/dialog'
 
 const store = useDialogStore()
-const props = defineProps(["title", "description"])
+defineProps(['title', 'description'])
 const isDesktop = useMediaQuery('(min-width: 768px)')
 const isOpen = ref(false)
 
-watch(() => store.isOpen, (open) => {
-  if (!open) {
-    isOpen.value = open
+watch(
+  () => store.isOpen,
+  (open) => {
+    if (!open) {
+      isOpen.value = open
+    }
   }
-}) 
+)
 </script>
 
 <template>
@@ -71,9 +71,7 @@ watch(() => store.isOpen, (open) => {
       </div>
       <DrawerFooter class="">
         <DrawerClose as-child>
-          <Button variant="outline">
-            Cancel
-          </Button>
+          <Button variant="outline"> Cancel </Button>
         </DrawerClose>
       </DrawerFooter>
     </DrawerContent>

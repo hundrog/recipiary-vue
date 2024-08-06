@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
-const props = defineProps(['recipe'])
+defineProps(['recipe'])
 </script>
 
 <template>
@@ -21,7 +21,12 @@ const props = defineProps(['recipe'])
       <CardDescription>{{ recipe.Description }}</CardDescription>
     </CardHeader>
     <CardContent class="flex flex-wrap">
-      <Badge variant="secondary" v-for="ingredient in recipe.Ingredients" class="mt-2 mx-0.5">
+      <Badge
+        variant="secondary"
+        v-for="ingredient in recipe.Ingredients"
+        :key="ingredient.ID"
+        class="mt-2 mx-0.5"
+      >
         {{ ingredient.Name }}
       </Badge>
     </CardContent>

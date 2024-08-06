@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CategoriesItem from './item.vue'
-const props = defineProps(["categories"])
+defineProps(['categories'])
 </script>
 
 <template>

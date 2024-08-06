@@ -1,26 +1,21 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { useDialogStore } from '@/stores/dialog'
-import { useInstructionStore } from '@/stores/instruction'
-import { ref, toRef } from 'vue'
+import { useInstructionStore, type Instruction } from '@/stores/instruction'
+import { ref, type PropType } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 
-const props = defineProps({
-  instruction: Object as PropType<Instruction>,
-  editing: Boolean,
-  position: Number
-})
+const props = defineProps(['instruction', 'position'])
 const instructionStore = useInstructionStore()
 const dialog = useDialogStore()
 const route = useRoute()
-const content = ref(props.instruction.Content)
-const position = toRef()
+const content = ref(props.instruction?.Content)
 
 function onSubmit() {
   instructionStore.upsert({
-    ID: props.instruction.ID,
+    ID: props.instruction?.ID,
     Content: content.value,
     RecipeId: route.params.id,
     Position: props.position
@@ -31,7 +26,7 @@ function onSubmit() {
 function remove() {
   instructionStore.remove({
     RecipeId: route.params.id,
-    ID: props.instruction.ID
+    ID: props.instruction?.ID
   })
   dialog.close()
 }
@@ -44,6 +39,6 @@ function remove() {
       <Textarea placeholder="Type your new instruction here." v-model="content" />
     </div>
     <Button type="submit">Save</Button>
-    <Button type="button" variant="outline" @click="remove()" v-if="instruction.ID">Delete</Button>
+    <Button type="button" variant="outline" @click="remove()" v-if="instruction?.ID">Delete</Button>
   </form>
 </template>
