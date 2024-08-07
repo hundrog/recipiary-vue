@@ -34,10 +34,8 @@ function onSubmit() {
     <form @submit.prevent="onSubmit">
       <CardHeader>
         <CardTitle>Recipe</CardTitle>
-        <CardDescription> </CardDescription>
       </CardHeader>
       <CardContent class="space-y-2">
-        <img class="mb-4 w-full sm:max-w-xl" :src="recipe.ImageUrl" />
         <div class="space-y-1">
           <Label for="name">Name</Label>
           <Input id="name" :default-value="recipe.Name" v-model="name" />
@@ -46,9 +44,12 @@ function onSubmit() {
           <Label for="description">Description</Label>
           <Input id="description" :default-value="recipe.Description" v-model="description" />
         </div>
-        <div class="space-y-1 hidden">
-          <Label for="imageUrl">Image URL</Label>
-          <Input id="imageUrl" disabled :default-value="recipe.ImageUrl" v-model="uri" />
+        <div class="flex w-full tems-center gap-1.5">
+          <Input disabled id="imageUrl" :default-value="recipe.ImageUrl" v-model="uri" />
+          <Button type="button">Search image</Button>
+        </div>
+        <div>
+          <img class="mt-4 w-full sm:max-w-xl" :src="recipe.ImageUrl" />
         </div>
       </CardContent>
       <CardFooter class="justify-end">
