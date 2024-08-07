@@ -12,6 +12,8 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import ResourcesUpsert from '@/components/resources/upsert.vue'
+import SearchImage from './searchImage.vue'
 
 const recipeStore = useRecipeStore()
 const props = defineProps(['recipe'])
@@ -46,7 +48,14 @@ function onSubmit() {
         </div>
         <div class="flex w-full tems-center gap-1.5">
           <Input disabled id="imageUrl" :default-value="recipe.ImageUrl" v-model="uri" />
-          <Button type="button">Search image</Button>
+          <ResourcesUpsert>
+            <template #trigger>
+              <Button type="button">Search image</Button>
+            </template>
+            <template #content>
+              <SearchImage />
+            </template>
+          </ResourcesUpsert>
         </div>
         <div>
           <img class="mt-4 w-full sm:max-w-xl" :src="recipe.ImageUrl" />
