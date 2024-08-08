@@ -4,7 +4,7 @@ import { ref, watch } from 'vue'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
-  DialogContent,
+  DialogScrollContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
@@ -42,7 +42,7 @@ watch(
     <DialogTrigger as-child>
       <slot name="trigger" />
     </DialogTrigger>
-    <DialogContent class="sm:max-w-[425px]">
+    <DialogScrollContent class="sm:max-w-screen-sm">
       <DialogHeader>
         <DialogTitle>{{ title }}</DialogTitle>
         <DialogDescription>
@@ -52,7 +52,7 @@ watch(
         </DialogDescription>
       </DialogHeader>
       <slot name="content" />
-    </DialogContent>
+    </DialogScrollContent>
   </Dialog>
 
   <Drawer v-else v-model:open="isOpen">

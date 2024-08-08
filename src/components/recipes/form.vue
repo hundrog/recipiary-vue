@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRecipeStore } from '@/stores/recipe'
-import { ref } from 'vue'
+import { useImageStore } from '@/stores/image'
+import { ref, toRef } from 'vue'
 import {
   Card,
   CardContent,
@@ -14,6 +15,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import ResourcesUpsert from '@/components/resources/upsert.vue'
 import SearchImage from './searchImage.vue'
+const imageStore = useImageStore()
 
 const recipeStore = useRecipeStore()
 const props = defineProps(['recipe'])
@@ -29,6 +31,10 @@ function onSubmit() {
     ImageUrl: uri.value
   })
 }
+
+imageStore.$subscribe((mutation, state) => {
+  uri.value = state.uri
+})
 </script>
 
 <template>
@@ -58,7 +64,7 @@ function onSubmit() {
           </ResourcesUpsert>
         </div>
         <div>
-          <img class="mt-4 w-full sm:max-w-xl" :src="recipe.ImageUrl" />
+          <img class="mt-4 w-full sm:max-w-xl" :src="uri || recipe.ImageUrl" />
         </div>
       </CardContent>
       <CardFooter class="justify-end">
