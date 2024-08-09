@@ -22,12 +22,14 @@ const ingredientStore = useIngredientStore()
 const props = defineProps(['ingredient'])
 const name = ref()
 const categoryId = ref()
+const portion = ref()
 
 function onSubmit() {
   ingredientStore.upsert({
     ID: props.ingredient.ID,
     Name: name.value,
-    CategoryId: categoryId.value
+    CategoryId: categoryId.value,
+    Portion: portion.value
   })
 
   dialog.close()
@@ -49,11 +51,7 @@ function onSubmit() {
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Category</SelectLabel>
-            <SelectItem
-              v-for="category in categoryStore.categories"
-              :value="category.ID"
-              :key="category.ID"
-            >
+            <SelectItem v-for="category in categoryStore.categories" :value="category.ID" :key="category.ID">
               <div class="flex">
                 <div class="px-6 py-2 mx-2 rounded-md" :class="[`bg-${category.Color}-400`]"></div>
                 {{ category.Name }}
@@ -62,6 +60,8 @@ function onSubmit() {
           </SelectGroup>
         </SelectContent>
       </Select>
+      <Label html-for="portion">Portion</Label>
+      <Input id="portion" :default-value="ingredient.Portion" v-model="portion" />
     </div>
     <Button type="submit"> Save changes </Button>
     <Button type="button" variant="outline" v-if="ingredient.ID"> Delete </Button>

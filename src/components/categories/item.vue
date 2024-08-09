@@ -18,18 +18,12 @@ function openModal() {
 </script>
 
 <template>
-  <div
-    class="flex justify-between items-center hover:bg-muted min-h-20 bg-card border px-4 md:px-12"
-  >
-    <div class="min-w-24 max-w-36 font-bold">{{ category.Name }}</div>
-    <div>
-      <div class="py-4 px-6 rounded-md" :class="[colorClass(category.Color)]" />
-    </div>
-    <div class="flex space-x-1 md:space-x-2">
-      <ResourcesUpsert
-        title="Edit Category"
-        description="Make changes to your category here. Click save when you're done."
-      >
+  <div class="grid grid-cols-4 gap-4 items-center hover:bg-muted min-h-20 bg-card border px-4 md:px-12">
+    <div class="font-bold col-span-2">{{ category.Name }}</div>
+    <div class="py-4 max-w-24" :class="[colorClass(category.Color)]" />
+    <div class="justify-self-end">
+      <ResourcesUpsert title="Edit Category"
+        description="Make changes to your category here. Click save when you're done.">
         <template #trigger>
           <Button variant="outline" size="icon" @click="openModal">
             <Pencil class="size-4" />
