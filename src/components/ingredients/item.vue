@@ -20,10 +20,12 @@ function openModal() {
 
 <template>
   <div class="grid grid-cols-4 gap-4 items-center hover:bg-secondary/45 min-h-20 bg-card border px-4 md:px-12">
-    <div class="font-bold col-span-1">{{ ingredient.Name }}</div>
+    <div class="font-bold col-span-2 sm:col-span-1">{{ ingredient.Name }}</div>
     <div>{{ ingredient.Portion }}</div>
-    <Badge variant="secondary" :class="[colorClass(ingredient.Category.Color)]" class="flex justify-center max-w-32">{{
-      ingredient.Category.Name }}</Badge>
+    <Badge variant="secondary" :class="[colorClass(ingredient.Category.Color)]"
+      class="hidden sm:flex justify-center max-w-32">
+      {{
+        ingredient.Category.Name }}</Badge>
     <div class="justify-self-end">
       <ResourcesUpsert title="Edit ingredient"
         description="Make changes to your ingredient here. Click save when you're done.">
