@@ -27,6 +27,7 @@ const portion = ref()
 
 const element = ref()
 const elements = toRef(ingredientStore.ingredients)
+const recipeId = Number(route.params.id)
 
 function onSubmit() {
   if (props.ingredient?.ID) {
@@ -34,14 +35,14 @@ function onSubmit() {
       ID: props.ingredient?.ID,
       Name: name.value,
       Amount: parseInt(amount.value),
-      RecipeId: route.params.id
+      RecipeId: recipeId
     })
   } else {
     recipeIngredientStore.insert({
       ID: element.value.ID,
       Name: name.value,
       Amount: parseInt(amount.value),
-      RecipeId: route.params.id
+      RecipeId: recipeId
     })
   }
   dialog.close()
@@ -49,7 +50,7 @@ function onSubmit() {
 
 function remove() {
   recipeIngredientStore.remove({
-    RecipeId: route.params.id,
+    RecipeId: recipeId,
     ...props.ingredient
   })
   dialog.close()

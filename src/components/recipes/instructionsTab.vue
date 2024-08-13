@@ -27,7 +27,7 @@ function saveOrder() {
     return { Position: index, ID: el.ID }
   })
   instructionStore.order({
-    RecipeId: route.params.id,
+    RecipeId: Number(route.params.id),
     Updates: payload
   })
 }

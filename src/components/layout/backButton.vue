@@ -13,7 +13,7 @@ const justifyTo = computed(() => `justify-${props.justify}`)
 <template>
   <div class="flex my-4" :class="[justifyTo]">
     <Button as-child class="gap-2">
-      <RouterLink :to="route">
+      <RouterLink :to="String(route ?? '/')">
         <CircleArrowLeft />
         Back
       </RouterLink>

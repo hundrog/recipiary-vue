@@ -31,7 +31,7 @@ const checked = ref(colorMode.value == 'dark')
 
 const logout = () => router.push('/login')
 
-function handleChange(val) {
+function handleChange(val: Boolean) {
   val ? (colorMode.value = 'dark') : (colorMode.value = 'light')
 }
 </script>

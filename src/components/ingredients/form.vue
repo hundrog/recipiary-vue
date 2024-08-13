@@ -51,7 +51,8 @@ function onSubmit() {
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Category</SelectLabel>
-            <SelectItem v-for="category in categoryStore.categories" :value="category.ID" :key="category.ID">
+            <SelectItem v-for="category in categoryStore.categories" :value="String(category.ID ?? 0)"
+              :key="category.ID">
               <div class="flex">
                 <div class="px-6 py-2 mx-2 rounded-md" :class="[`bg-${category.Color}-400`]"></div>
                 {{ category.Name }}

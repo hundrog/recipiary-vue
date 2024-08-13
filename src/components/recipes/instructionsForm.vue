@@ -12,12 +12,13 @@ const instructionStore = useInstructionStore()
 const dialog = useDialogStore()
 const route = useRoute()
 const content = ref(props.instruction?.Content)
+const recipeId = Number(route.params.id)
 
 function onSubmit() {
   instructionStore.upsert({
     ID: props.instruction?.ID,
     Content: content.value,
-    RecipeId: route.params.id,
+    RecipeId: recipeId,
     Position: props.position
   })
   dialog.close()
@@ -25,7 +26,7 @@ function onSubmit() {
 
 function remove() {
   instructionStore.remove({
-    RecipeId: route.params.id,
+    RecipeId: recipeId,
     ID: props.instruction?.ID
   })
   dialog.close()

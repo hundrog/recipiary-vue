@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useRecipeStore } from '@/stores/recipe'
-import { useInstructionStore } from '@/stores/instruction'
-import { useRecipeIngredientStore } from '@/stores/recipeIngredient'
+import { useRecipeStore, type Recipe } from '@/stores/recipe'
+import { useInstructionStore, type Instruction } from '@/stores/instruction'
+import { useRecipeIngredientStore, type RecipeIngredient } from '@/stores/recipeIngredient'
 import { Separator } from '@/components/ui/separator'
 import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
@@ -22,14 +22,15 @@ const recipeStore = useRecipeStore()
 const recipeIngredientStore = useRecipeIngredientStore()
 const instructionStore = useInstructionStore()
 
-const recipe = ref({})
-const recipeIngredients = ref([])
-const instructions = ref([])
+const recipe = ref<Recipe>({})
+const recipeIngredients = ref<RecipeIngredient[]>([])
+const instructions = ref<Instruction[]>([])
+const recipeId = Number(route.params.id)
 
 onMounted(async () => {
-  await recipeStore.get(route.params.id)
-  await recipeIngredientStore.list(route.params.id)
-  await instructionStore.list(route.params.id)
+  await recipeStore.get(recipeId)
+  await recipeIngredientStore.list(recipeId)
+  await instructionStore.list(recipeId)
 
   recipe.value = recipeStore.recipe
   recipeIngredients.value = recipeIngredientStore.recipeIngredients

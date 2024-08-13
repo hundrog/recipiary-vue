@@ -12,15 +12,16 @@ import RecipesForm from '@/components/recipes/form.vue'
 import LayoutBackButton from '@/components/layout/backButton.vue'
 
 const route = useRoute()
+const recipeId = Number(route.params.id)
 const recipeStore = useRecipeStore()
 const recipeIngredientStore = useRecipeIngredientStore()
 const instructionStore = useInstructionStore()
 const ingredientStore = useIngredientStore()
 
 onMounted(async () => {
-  await recipeStore.get(route.params.id)
-  await recipeIngredientStore.list(route.params.id)
-  await instructionStore.list(route.params.id)
+  await recipeStore.get(recipeId)
+  await recipeIngredientStore.list(recipeId)
+  await instructionStore.list(recipeId)
   await ingredientStore.list()
 })
 
@@ -29,7 +30,7 @@ const recipe = toRef(recipeStore.recipe)
 
 <template>
   <div class="mx-auto max-w-screen-2xl">
-    <LayoutBackButton :route="`/recipes/${route.params.id}`" justify="end" />
+    <LayoutBackButton :route="`/recipes/${recipeId}`" justify="end" />
     <Tabs default-value="recipe">
       <TabsList class="grid w-full grid-cols-3">
         <TabsTrigger value="recipe"> Recipe </TabsTrigger>

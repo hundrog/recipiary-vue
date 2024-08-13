@@ -1,11 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { useMediaQuery } from '@vueuse/core'
 import { ref } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Check } from 'lucide-vue-next'
 import { useImageStore } from '@/stores/image'
 
@@ -25,8 +24,8 @@ async function searchImage() {
   pending.value = false
 }
 
-function handleChange(el) {
-  imageStore.uri = el.target.value
+function handleChange(value: string) {
+  imageStore.uri = value
 }
 </script>
 <template>
@@ -41,13 +40,13 @@ function handleChange(el) {
     <Skeleton class="w-full h-40" />
   </div>
   <ul class="grid grid-cols-2 gap-4">
-    <li class="relative" v-for="image in imageStore.images" :key="image.id">
-      <input class="sr-only peer" type="radio" :value="image.urls.regular" name="answer" :id="image.id"
-        @click="handleChange" />
+    <li class="relative" v-for="image in imageStore.images" :key="image.ID">
+      <input class="sr-only peer" type="radio" :value="image.Urls.Regular" name="answer" :id="image.ID"
+        @click="handleChange(image.Urls.Regular)" />
       <label
         class="flex border cursor-pointer focus:outline-none hover:border-primary peer-checked:ring-ring peer-checked:ring-2 peer-checked:border-transparent"
-        :for="image.id">
-        <img :src="image.urls.small" alt="" class="object-cover h-44 w-full">
+        :for="image.ID">
+        <img :src="image.Urls.Small" alt="" class="object-cover h-44 w-full">
       </label>
       <Check class="absolute hidden peer-checked:block top-3 right-3 text-primary size-8" />
     </li>
