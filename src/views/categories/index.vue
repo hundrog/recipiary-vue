@@ -22,10 +22,8 @@ onMounted(async () => {
 <template>
   <div class="flex justify-between">
     <h1 class="text-lg font-semibold md:text-2xl">Categories</h1>
-    <ResourcesUpsert
-      title="New Category"
-      description="Create your new category here. Click save when you're done."
-    >
+    <ResourcesUpsert title="New Category" description="Create your new category here. Click save when you're done."
+      v-if="categoryStore.categories.length > 0">
       <template #trigger>
         <Button @click="openModal"> Add Category </Button>
       </template>
@@ -34,19 +32,13 @@ onMounted(async () => {
       </template>
     </ResourcesUpsert>
   </div>
-  <div v-if="categoryStore.categories">
+  <div v-if="categoryStore.categories.length > 0">
     <CategoriesList :categories="categoryStore.categories" />
   </div>
-  <div
-    class="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
-    v-else
-  >
+  <div class="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm" v-else>
     <div class="flex flex-col items-center gap-1 text-center">
       <h3 class="text-2xl font-bold tracking-tight">You have no categories</h3>
-      <ResourcesUpsert
-        title="New Category"
-        description="Create your new category here. Click save when you're done."
-      >
+      <ResourcesUpsert title="New Category" description="Create your new category here. Click save when you're done.">
         <template #trigger>
           <Button @click="openModal"> Add Category </Button>
         </template>
