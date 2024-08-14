@@ -28,7 +28,7 @@ function onSubmit() {
   ingredientStore.upsert({
     ID: props.ingredient.ID,
     Name: name.value,
-    CategoryId: categoryId.value,
+    CategoryId: Number(categoryId.value),
     Portion: portion.value
   })
 
@@ -44,15 +44,14 @@ function onSubmit() {
     </div>
     <div class="grid gap-2">
       <Label html-for="categoryId">Category</Label>
-      <Select id="categoryId" :default-Value="ingredient.CategoryId" v-model="categoryId">
+      <Select id="categoryId" :default-Value="String(ingredient.CategoryId)" v-model="categoryId">
         <SelectTrigger class="">
           <SelectValue placeholder="Select a category" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Category</SelectLabel>
-            <SelectItem v-for="category in categoryStore.categories" :value="String(category.ID ?? 0)"
-              :key="category.ID">
+            <SelectItem v-for="category in categoryStore.categories" :value="String(category.ID)" :key="category.ID">
               <div class="flex">
                 <div class="px-6 py-2 mx-2 rounded-md" :class="[`bg-${category.Color}-400`]"></div>
                 {{ category.Name }}

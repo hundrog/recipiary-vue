@@ -57,19 +57,13 @@ function remove() {
 }
 
 function handleChange(item: string) {
-  portion.value = elements.value.find((el: RecipeIngredient) => el.ID?.toString() == item)?.Portion
+  portion.value = elements.value.find((el: RecipeIngredient) => String(el.ID) == item)?.Portion
 }
 </script>
 
 <template>
   <form @submit.prevent="onSubmit" class="grid gap-4">
-    <Input
-      id="name"
-      :default-value="ingredient?.Name"
-      disabled
-      v-model="name"
-      v-if="ingredient?.ID"
-    />
+    <Input id="name" :default-value="ingredient?.Name" disabled v-model="name" v-if="ingredient?.ID" />
     <Select v-else v-model="element" @update:modelValue="handleChange">
       <SelectTrigger>
         <SelectValue placeholder="Select an Ingredient" />
@@ -83,13 +77,7 @@ function handleChange(item: string) {
       </SelectContent>
     </Select>
     <Input id="amount" :default-value="ingredient?.Amount" v-model="amount" class="md:basis-1/4" />
-    <Input
-      id="portion"
-      :default-value="ingredient?.Portion"
-      v-model="portion"
-      disabled
-      class="md:basis-1/3"
-    />
+    <Input id="portion" :default-value="ingredient?.Portion" v-model="portion" disabled class="md:basis-1/3" />
     <Separator class="mt-2" />
     <Button type="submit"> Save </Button>
     <Button variant="outline" type="button" @click="remove()" v-if="ingredient?.ID">
