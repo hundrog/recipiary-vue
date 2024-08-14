@@ -8,6 +8,8 @@ const recipeStore = useRecipeStore()
 onMounted(async () => {
   await recipeStore.list()
 })
+
+recipeStore.recipe = {}
 </script>
 
 <template>
