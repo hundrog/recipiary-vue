@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRecipeStore } from '@/stores/recipe'
 import { useImageStore } from '@/stores/image'
-import { ref, toRef } from 'vue'
+import { ref, toRef, watch } from 'vue'
 import {
   Card,
   CardContent,

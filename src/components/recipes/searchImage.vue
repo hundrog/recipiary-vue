@@ -40,13 +40,13 @@ function handleChange(value: string) {
     <Skeleton class="w-full h-40" />
   </div>
   <ul class="grid grid-cols-2 gap-4">
-    <li class="relative" v-for="image in imageStore.images" :key="image.ID">
-      <input class="sr-only peer" type="radio" :value="image.Urls.Regular" name="answer" :id="image.ID"
-        @click="handleChange(image.Urls.Regular)" />
+    <li class="relative" v-for="image in imageStore.images" :key="image.id">
+      <input class="sr-only peer" type="radio" :value="image.urls.regular" name="answer" :id="image.id"
+        @click="handleChange(image.urls.regular)" />
       <label
         class="flex border cursor-pointer focus:outline-none hover:border-primary peer-checked:ring-ring peer-checked:ring-2 peer-checked:border-transparent"
-        :for="image.ID">
-        <img :src="image.Urls.Small" alt="" class="object-cover h-44 w-full">
+        :for="image.id">
+        <img :src="image.urls.small" alt="" class="object-cover h-44 w-full">
       </label>
       <Check class="absolute hidden peer-checked:block top-3 right-3 text-primary size-8" />
     </li>

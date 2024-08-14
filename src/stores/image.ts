@@ -3,13 +3,14 @@ import { defineStore } from 'pinia'
 import { goFetch } from '@/composables/goFetch'
 
 export interface Uris {
-  Regular: string
-  Small: string
+  regular: string
+  small: string
 }
 
 export interface Image {
-  ID?: string
-  Urls: Uris
+  id?: string
+  alt_description?: string
+  urls?: Uris
 }
 
 export interface SearchQuery {

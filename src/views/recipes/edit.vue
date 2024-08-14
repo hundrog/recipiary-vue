@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, toRef } from 'vue'
+import { onMounted, computed, toRef } from 'vue'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useRecipeStore } from '@/stores/recipe'
 import { useInstructionStore } from '@/stores/instruction'
@@ -19,18 +19,22 @@ const instructionStore = useInstructionStore()
 const ingredientStore = useIngredientStore()
 
 onMounted(async () => {
-  await recipeStore.get(recipeId)
-  await recipeIngredientStore.list(recipeId)
-  await instructionStore.list(recipeId)
+  if (recipeId) {
+    await recipeStore.get(recipeId)
+    await recipeIngredientStore.list(recipeId)
+    await instructionStore.list(recipeId)
+  }
   await ingredientStore.list()
 })
+
+const backTo = computed(() => recipeId ? `/recipes/${recipeId}` : "/recipes")
 
 const recipe = toRef(recipeStore.recipe)
 </script>
 
 <template>
   <div class="mx-auto max-w-screen-2xl">
-    <LayoutBackButton :route="`/recipes/${recipeId}`" justify="end" />
+    <LayoutBackButton :route="backTo" justify="end" />
     <Tabs default-value="recipe">
       <TabsList class="grid w-full grid-cols-3">
         <TabsTrigger value="recipe"> Recipe </TabsTrigger>

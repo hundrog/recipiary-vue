@@ -1,6 +1,7 @@
 import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import { goFetch } from '@/composables/goFetch'
+import { useRouter } from 'vue-router'
 
 export interface Recipe {
   ID?: number
@@ -12,6 +13,7 @@ export interface Recipe {
 export const useRecipeStore = defineStore('recipe', () => {
   const recipe: Ref<Recipe> = ref({})
   const recipes: Ref<Recipe[]> = ref([])
+  const router = useRouter()
 
   async function list() {
     const { data } = await goFetch('/recipes', {})
@@ -25,25 +27,26 @@ export const useRecipeStore = defineStore('recipe', () => {
     recipe.value = data
   }
 
-  async function upsert(recipe: Recipe) {
-    if (recipe.ID) {
+  async function upsert(payload: Recipe) {
+    if (payload.ID) {
       // update
-      const { data } = await goFetch(`/recipes/${recipe.ID}`, {
+      const { data } = await goFetch(`/recipes/${payload.ID}`, {
         method: 'PATCH',
-        body: recipe
+        body: payload
       })
 
-      const indexOf = recipes.value.findIndex((el: Recipe) => el.ID == recipe.ID)
+      const indexOf = recipes.value.findIndex((el: Recipe) => el.ID == payload.ID)
 
       recipes.value[indexOf] = data
     } else {
       //insert
       const { data } = await goFetch('/recipes', {
         method: 'POST',
-        body: recipe
+        body: payload
       })
 
       recipes.value.push(data)
+      router.replace(`/recipes/${data.ID}`)
     }
   }
 
