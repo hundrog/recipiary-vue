@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Home, Package, Package2, Waypoints, BookHeart } from 'lucide-vue-next'
+import { Home, Package, Package2, Waypoints, BookHeart, Calendar } from 'lucide-vue-next'
 </script>
 
 <template>
@@ -12,6 +12,11 @@ import { Home, Package, Package2, Waypoints, BookHeart } from 'lucide-vue-next'
       activeClass="bg-muted text-primary hover:text-primary">
       <Home class="h-5 w-5" />
       Dashboard
+    </RouterLink>
+    <RouterLink to="/schedules" class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground"
+      activeClass="bg-muted text-primary hover:text-primary">
+      <Calendar class="h-5 w-5" />
+      Schedules
     </RouterLink>
     <RouterLink to="/categories"
       class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground"
