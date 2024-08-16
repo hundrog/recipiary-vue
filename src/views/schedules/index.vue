@@ -4,7 +4,7 @@ import { useCategoryStore } from '@/stores/category'
 import { onMounted } from 'vue'
 import ResourcesUpsert from '@/components/resources/upsert.vue'
 import CategoriesList from '@/components/categories/list.vue'
-import CategoriesForm from '@/components/categories/form.vue'
+import SchedulesForm from './form.vue'
 import { Button } from '@/components/ui/button'
 
 const dialog = useDialogStore()
@@ -28,7 +28,7 @@ onMounted(async () => {
         <Button @click="openModal"> Add Schedule </Button>
       </template>
       <template #content>
-        <CategoriesForm :category="{}" />
+        <SchedulesForm />
       </template>
     </ResourcesUpsert>
   </div>
@@ -43,7 +43,7 @@ onMounted(async () => {
           <Button @click="openModal"> Add Schedule </Button>
         </template>
         <template #content>
-          <CategoriesForm :category="{}" />
+          <SchedulesForm />
         </template>
       </ResourcesUpsert>
     </div>
