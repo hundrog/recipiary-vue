@@ -24,11 +24,6 @@ const router = createRouter({
       component: () => import('@/views/AboutView.vue')
     },
     {
-      path: '/schedules',
-      name: 'schedules',
-      component: () => import('@/views/schedules/index.vue')
-    },
-    {
       path: '/categories',
       name: 'categories',
       component: () => import('@/views/categories/index.vue')
@@ -60,6 +55,21 @@ const router = createRouter({
           path: 'new',
           name: 'new_recipe',
           component: () => import('@/views/recipes/edit.vue'),
+        },
+      ]
+    },
+    {
+      path: '/schedules',
+      children: [
+        {
+          path: '',
+          name: 'schedules',
+          component: () => import('@/views/schedules/index.vue'),
+        },
+        {
+          path: ':id(\\d+)',
+          name: 'show_schedule',
+          component: () => import('@/views/schedules/show.vue'),
         },
       ]
     },
