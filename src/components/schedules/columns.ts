@@ -2,21 +2,12 @@ import { ref, h } from 'vue'
 import type { Schedule } from '@/stores/schedule'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { useDateFormat } from '@vueuse/core'
-import DropdownAction from '@/components/schedules/data_table_dropdown.vue'
+import { Button } from '@/components/ui/button'
+import { RouterLink } from 'vue-router'
 
 const dateFormat = ref('YYYY-MM-DD')
 
 export const columns: ColumnDef<Schedule>[] = [
-  // {
-  //   accessorKey: 'ID',
-  //   header: () => h('div', { class: 'text-right' }, 'ID'),
-  //   cell: ({ row }) => {
-  //     const id = Number.parseFloat(row.getValue('ID'))
-  //     const formatted = id
-  //
-  //     return h('div', { class: 'text-right font-medium' }, formatted)
-  //   },
-  // },
   {
     accessorKey: 'StartDate',
     header: () => h('div', { class: 'text-left' }, 'Start Date'),
@@ -38,14 +29,14 @@ export const columns: ColumnDef<Schedule>[] = [
     },
   },
   {
-    id: 'actions',
+    id: 'edit',
     enableHiding: false,
     cell: ({ row }) => {
       const schedule = row.original
 
-      return h('div', { class: 'relative text-right' }, h(DropdownAction, {
-        schedule
-      }))
+      return h('div', { class: 'relative text-right' }, h(Button, { 'as-child': true, 'variant': 'outline' }, () => h(RouterLink, {
+        to: `/schedules/${schedule.ID}`
+      }, () => 'Details')))
     },
   },
 ]
