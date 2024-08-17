@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { type Ref, ref } from 'vue'
-import { useMediaQuery } from '@vueuse/core'
 import { CalendarDate } from '@internationalized/date'
 import type { DateRange } from 'radix-vue'
 import { RangeCalendar } from '@/components/ui/range-calendar'
 import { Button } from '@/components/ui/button'
-import { useDateFormat, useNow } from '@vueuse/core'
+import { useDateFormat, useNow, useMediaQuery } from '@vueuse/core'
 import { useScheduleStore } from '@/stores/schedule'
 
 const dateFormat = ref('YYYY-MM-DD')
