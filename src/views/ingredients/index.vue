@@ -1,20 +1,24 @@
 <script setup lang="ts">
 import { useDialogStore } from '@/stores/dialog'
-import { useIngredientStore } from '@/stores/ingredient'
+import { useIngredientStore, type Ingredient } from '@/stores/ingredient'
 import { useCategoryStore } from '@/stores/category'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import ResourcesUpsert from '@/components/resources/upsert.vue'
 import IngredientsList from '@/components/ingredients/list.vue'
 import IngredientsForm from '@/components/ingredients/form.vue'
 import { Button } from '@/components/ui/button'
+import { DataTable } from '@/components/ui/data-table'
+import { columns } from '@/components/ingredients/columns'
 
 const dialog = useDialogStore()
 const ingredientStore = useIngredientStore()
 const categoryStore = useCategoryStore()
+const data = ref<Ingredient[]>([])
 
 onMounted(async () => {
   await ingredientStore.list()
   await categoryStore.list()
+  data.value = ingredientStore.ingredients
 })
 
 function openModal() {
@@ -36,7 +40,8 @@ function openModal() {
     </ResourcesUpsert>
   </div>
   <div v-if="ingredientStore.ingredients.length > 0">
-    <IngredientsList :ingredients="ingredientStore.ingredients" />
+    <DataTable :columns="columns" :data="data" />
+    <!-- <IngredientsList :ingredients="ingredientStore.ingredients" /> -->
   </div>
   <div class="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm" v-else>
     <div class="flex flex-col items-center gap-1 text-center">
