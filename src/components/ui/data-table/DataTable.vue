@@ -4,6 +4,7 @@ import {
   FlexRender,
   getCoreRowModel,
   useVueTable,
+  getPaginationRowModel,
 } from '@tanstack/vue-table'
 
 import {
@@ -14,6 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { Button } from '@/components/ui/button'
 
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[]
@@ -24,12 +26,13 @@ const table = useVueTable({
   get data() { return props.data },
   get columns() { return props.columns },
   getCoreRowModel: getCoreRowModel(),
+  getPaginationRowModel: getPaginationRowModel(),
 })
 </script>
 
 <template>
-  <div class="border max-w-screen-2xl mx-auto">
-    <Table>
+  <div class="max-w-screen-2xl mx-auto">
+    <Table class="border">
       <TableHeader>
         <TableRow v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
           <TableHead v-for="header in headerGroup.headers" :key="header.id">
@@ -56,5 +59,14 @@ const table = useVueTable({
         </template>
       </TableBody>
     </Table>
+
+    <div class="flex items-center justify-end py-4 space-x-2" v-if="table.getPageCount() > 1">
+      <Button variant="outline" :disabled="!table.getCanPreviousPage()" @click="table.previousPage()">
+        Previous
+      </Button>
+      <Button variant="outline" :disabled="!table.getCanNextPage()" @click="table.nextPage()">
+        Next
+      </Button>
+    </div>
   </div>
 </template>

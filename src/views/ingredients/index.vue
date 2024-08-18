@@ -41,7 +41,6 @@ function openModal() {
   </div>
   <div v-if="ingredientStore.ingredients.length > 0">
     <DataTable :columns="columns" :data="data" />
-    <!-- <IngredientsList :ingredients="ingredientStore.ingredients" /> -->
   </div>
   <div class="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm" v-else>
     <div class="flex flex-col items-center gap-1 text-center">
