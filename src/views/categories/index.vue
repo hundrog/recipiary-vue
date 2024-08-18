@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { useDialogStore } from '@/stores/dialog'
-import { useCategoryStore } from '@/stores/category'
-import { onMounted } from 'vue'
+import { useCategoryStore, type Category } from '@/stores/category'
+import { onMounted, ref } from 'vue'
 import ResourcesUpsert from '@/components/resources/upsert.vue'
-import CategoriesList from '@/components/categories/list.vue'
 import CategoriesForm from '@/components/categories/form.vue'
 import { Button } from '@/components/ui/button'
+import { DataTable } from '@/components/ui/data-table'
+import { columns } from '@/components/categories/columns'
 
 const dialog = useDialogStore()
 const categoryStore = useCategoryStore()
+const data = ref<Category[]>([])
 
 function openModal() {
   dialog.open()
@@ -16,6 +18,8 @@ function openModal() {
 
 onMounted(async () => {
   await categoryStore.list()
+
+  data.value = categoryStore.categories
 })
 </script>
 
@@ -33,7 +37,7 @@ onMounted(async () => {
     </ResourcesUpsert>
   </div>
   <div v-if="categoryStore.categories.length > 0">
-    <CategoriesList :categories="categoryStore.categories" />
+    <DataTable :columns="columns" :data="data" />
   </div>
   <div class="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm" v-else>
     <div class="flex flex-col items-center gap-1 text-center">
