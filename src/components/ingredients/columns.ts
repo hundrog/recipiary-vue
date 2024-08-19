@@ -36,15 +36,15 @@ export const columns: ColumnDef<Ingredient>[] = [
   },
   {
     accessorKey: 'CategoryId',
-    header: () => h('div', { class: 'text-center max-w-32' }, 'Category'),
+    header: () => h('div', { class: 'sr-only sm:not-sr-only text-center max-w-32' }, 'Category'),
     cell: ({ row }) => {
       const ingredient = row.original
       const category = ingredient.Category
       const color = colorClass(String(category?.Color))
       const formatted = String(category?.Name)
 
-      return h('div', { class: 'text-left font-medium max-w-32' },
-        h(Badge, { variant: 'secondary', class: `justify-center w-full ${color}` }, formatted))
+      return h('div', { class: 'sr-only sm:not-sr-only text-left font-medium max-w-32' },
+        h(Badge, { variant: 'secondary', class: `justify-center w-full ${color}` }, () => formatted))
     },
   },
   {

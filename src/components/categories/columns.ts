@@ -25,12 +25,12 @@ export const columns: ColumnDef<Category>[] = [
   },
   {
     accessorKey: 'Color',
-    header: () => h('div', { class: 'text-center max-w-32' }, 'Category'),
+    header: () => h('div', { class: 'text-center max-w-24' }, 'Color'),
     cell: ({ row }) => {
       const color = row.getValue('Color')
       const formatted = colorClass(String(color))
 
-      return h('div', { class: `max-w-32 rounded-full py-3 ${formatted}` })
+      return h('div', { class: `max-w-24 rounded-full py-3 ${formatted}` })
     },
   },
   {

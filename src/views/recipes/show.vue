@@ -3,7 +3,7 @@ import { useRecipeStore, type Recipe } from '@/stores/recipe'
 import { useInstructionStore, type Instruction } from '@/stores/instruction'
 import { useRecipeIngredientStore, type RecipeIngredient } from '@/stores/recipeIngredient'
 import { Separator } from '@/components/ui/separator'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import {
   Card,
@@ -14,7 +14,6 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Blend } from 'lucide-vue-next'
 import LayoutBackButton from '@/components/layout/backButton.vue'
 
 const route = useRoute()
