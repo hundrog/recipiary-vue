@@ -23,9 +23,10 @@ const schedule = ref<Schedule>({})
 
 onMounted(async () => {
   await scheduleStore.get(scheduleId)
-  schedule.value = scheduleStore.schedule
+})
 
-  console.log(schedule.value)
+scheduleStore.$subscribe((mutation, state) => {
+  schedule.value = scheduleStore.schedule
 })
 </script>
 

@@ -11,6 +11,11 @@ export interface Schedule {
   Recipes?: Recipe[]
 }
 
+export interface ScheduleRecipeInput {
+  ScheduleID?: number
+  RecipeID?: number
+}
+
 export const useScheduleStore = defineStore('schedule', () => {
   const schedule: Ref<Schedule> = ref({})
   const schedules: Ref<Schedule[]> = ref([])
@@ -58,5 +63,29 @@ export const useScheduleStore = defineStore('schedule', () => {
     schedules.value = schedules.value.filter((el) => el.ID != payload.ID)
   }
 
-  return { schedule, schedules, list, get, upsert, remove }
+  async function addRecipe(payload: ScheduleRecipeInput) {
+    const { data } = await goFetch(`/schedules/${payload.ScheduleID}/recipes`, {
+      method: 'POST',
+      body: {
+        RecipeIDs: [payload.RecipeID]
+      }
+    })
+
+    const concatRecipes = Array.from(new Set(schedule.value.Recipes?.concat(data.Recipes)))
+    schedule.value.Recipes = concatRecipes
+  }
+
+  async function removeRecipe(payload: ScheduleRecipeInput) {
+    await goFetch(`/schedules/${payload.ScheduleID}/recipes`, {
+      method: 'DELETE',
+      body: {
+        RecipeIDs: [payload.RecipeID]
+      }
+    })
+
+    const filteredRecipes = schedule.value.Recipes?.filter((recipe) => recipe.ID !== payload.RecipeID) || []
+    schedule.value.Recipes = filteredRecipes
+  }
+
+  return { schedule, schedules, list, get, upsert, remove, addRecipe, removeRecipe }
 })
