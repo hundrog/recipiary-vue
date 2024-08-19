@@ -4,16 +4,15 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { useDateFormat } from '@vueuse/core'
 import { Button } from '@/components/ui/button'
 import { RouterLink } from 'vue-router'
-
-const dateFormat = ref('YYYY-MM-DD')
+import { formatDate } from '@/composables/formatDate'
 
 export const columns: ColumnDef<Schedule>[] = [
   {
     accessorKey: 'StartDate',
     header: () => h('div', { class: 'text-left' }, 'Start Date'),
     cell: ({ row }) => {
-      const startDate = Number.parseFloat(row.getValue('StartDate'))
-      const formatted = useDateFormat(startDate.toString(), dateFormat).value
+      const startDate = String(row.getValue('StartDate'))
+      const formatted = formatDate(startDate)
 
       return h('div', { class: 'text-left font-medium' }, formatted)
     },
@@ -22,8 +21,8 @@ export const columns: ColumnDef<Schedule>[] = [
     accessorKey: 'FinalDate',
     header: () => h('div', { class: 'text-left' }, 'Finish Date'),
     cell: ({ row }) => {
-      const finalDate = Number.parseFloat(row.getValue('FinalDate'))
-      const formatted = useDateFormat(finalDate.toString(), dateFormat).value
+      const finalDate = String(row.getValue('FinalDate'))
+      const formatted = formatDate(finalDate)
 
       return h('div', { class: 'text-left font-medium' }, formatted)
     },

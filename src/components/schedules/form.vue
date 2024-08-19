@@ -4,12 +4,11 @@ import { CalendarDate } from '@internationalized/date'
 import type { DateRange } from 'radix-vue'
 import { RangeCalendar } from '@/components/ui/range-calendar'
 import { Button } from '@/components/ui/button'
-import { useDateFormat, useNow, useMediaQuery } from '@vueuse/core'
+import { useNow, useMediaQuery } from '@vueuse/core'
 import { useScheduleStore } from '@/stores/schedule'
+import { formatDate, formatDateTime } from '@/composables/formatDate'
 
-const dateFormat = ref('YYYY-MM-DD')
-const timeFormat = ref('YYYY-MM-DDTHH:mm:ssZ')
-const [year, month, day] = useDateFormat(useNow(), dateFormat).value.split('-').map(Number)
+const [year, month, day] = formatDate(String(useNow().value)).split('-').map(Number)
 const scheduleStore = useScheduleStore()
 
 const value = ref({
@@ -20,12 +19,12 @@ const value = ref({
 const isDesktop = useMediaQuery('(min-width: 768px)')
 
 async function insert() {
-  console.log(useDateFormat(value.value.start?.toString(), timeFormat).value)
-  console.log(useDateFormat(value.value.end?.toString(), timeFormat).value)
+  console.log(formatDateTime(String(value.value.start)))
+  console.log(formatDateTime(String(value.value.end)))
 
   await scheduleStore.upsert({
-    StartDate: useDateFormat(value.value.start?.toString(), timeFormat).value,
-    FinalDate: useDateFormat(value.value.end?.toString(), timeFormat).value
+    StartDate: formatDateTime(String(value.value.start)),
+    FinalDate: formatDateTime(String(value.value.end))
   })
 }
 </script>
