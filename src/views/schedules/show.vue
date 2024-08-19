@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
+import { useScheduleStore, type Schedule } from '@/stores/schedule'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -8,67 +10,41 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Switch } from '@/components/ui/switch'
 import LayoutBackButton from '@/components/layout/backButton.vue'
+import { useRoute } from 'vue-router'
+import RecipesList from '@/components/recipes/list.vue'
+import { formatDate } from '@/composables/formatDate'
 
-
-const notifications = [
-  {
-    title: 'Your call has been confirmed.',
-    description: '1 hour ago',
-  },
-  {
-    title: 'You have a new message!',
-    description: '1 hour ago',
-  },
-  {
-    title: 'Your subscription is expiring soon!',
-    description: '2 hours ago',
-  },
-]
-
+const route = useRoute()
+const scheduleStore = useScheduleStore()
+const scheduleId = Number(route.params.id)
 const backTo = "/schedules"
+const schedule = ref<Schedule>({})
+
+onMounted(async () => {
+  await scheduleStore.get(scheduleId)
+  schedule.value = scheduleStore.schedule
+
+  console.log(schedule.value)
+})
 </script>
 
 <template>
   <div class="mx-auto grid w-full max-w-screen-xl">
     <LayoutBackButton :route="backTo" justify="end" />
     <Card>
-      <CardHeader>
-        <CardTitle>Notifications</CardTitle>
-        <CardDescription>You have 3 unread messages.</CardDescription>
-      </CardHeader>
-      <CardContent class="grid gap-4">
-        <div class=" flex items-center space-x-4 rounded-md border p-4">
-          <div class="flex-1 space-y-1">
-            <p class="text-sm font-medium leading-none">
-              Push Notifications
-            </p>
-            <p class="text-sm text-muted-foreground">
-              Send notifications to device.
-            </p>
-          </div>
-          <Switch />
-        </div>
+      <CardHeader class="flex-row justify-between items-center">
         <div>
-          <div v-for="(notification, index) in notifications" :key="index"
-            class="mb-4 grid grid-cols-[25px_minmax(0,1fr)] items-start pb-4 last:mb-0 last:pb-0">
-            <span class="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
-            <div class="space-y-1">
-              <p class="text-sm font-medium leading-none">
-                {{ notification.title }}
-              </p>
-              <p class="text-sm text-muted-foreground">
-                {{ notification.description }}
-              </p>
-            </div>
-          </div>
+          <CardTitle>From {{ formatDate(String(schedule.StartDate)) }} to {{ formatDate(String(schedule.FinalDate)) }}
+          </CardTitle>
+          <CardDescription>You have {{ schedule?.Recipes?.length }} recipes.</CardDescription>
         </div>
+        <Button>Add Recipes</Button>
+      </CardHeader>
+      <CardContent class="">
+        <RecipesList :recipes="schedule.Recipes" />
       </CardContent>
       <CardFooter>
-        <Button class="w-full">
-          Mark all as read
-        </Button>
       </CardFooter>
     </Card>
   </div>

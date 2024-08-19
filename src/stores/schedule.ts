@@ -2,14 +2,17 @@ import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import { goFetch } from '@/composables/goFetch'
 import { useRouter } from 'vue-router'
+import type { Recipe } from './recipe'
 
 export interface Schedule {
   ID?: string
   StartDate?: string
   FinalDate?: string
+  Recipes?: Recipe[]
 }
 
 export const useScheduleStore = defineStore('schedule', () => {
+  const schedule: Ref<Schedule> = ref({})
   const schedules: Ref<Schedule[]> = ref([])
   const router = useRouter()
 
@@ -17,6 +20,12 @@ export const useScheduleStore = defineStore('schedule', () => {
     const { data } = await goFetch('/schedules')
 
     schedules.value = data
+  }
+
+  async function get(id: number) {
+    const { data } = await goFetch(`/schedules/${id}`)
+
+    schedule.value = data
   }
 
   async function upsert(payload: Schedule) {
@@ -49,5 +58,5 @@ export const useScheduleStore = defineStore('schedule', () => {
     schedules.value = schedules.value.filter((el) => el.ID != payload.ID)
   }
 
-  return { schedules, list, upsert, remove }
+  return { schedule, schedules, list, get, upsert, remove }
 })
