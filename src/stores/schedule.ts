@@ -12,8 +12,8 @@ export interface Schedule {
 }
 
 export interface ScheduleRecipeInput {
-  ScheduleID?: number
-  RecipeID?: number
+  ScheduleID: number
+  RecipeIDs: number[]
 }
 
 export const useScheduleStore = defineStore('schedule', () => {
@@ -67,7 +67,7 @@ export const useScheduleStore = defineStore('schedule', () => {
     const { data } = await goFetch(`/schedules/${payload.ScheduleID}/recipes`, {
       method: 'POST',
       body: {
-        RecipeIDs: [payload.RecipeID]
+        RecipeIDs: payload.RecipeIDs
       }
     })
 
@@ -75,17 +75,28 @@ export const useScheduleStore = defineStore('schedule', () => {
     schedule.value.Recipes = concatRecipes
   }
 
+  async function updateRecipes(payload: ScheduleRecipeInput) {
+    const { data } = await goFetch(`/schedules/${payload.ScheduleID}/recipes`, {
+      method: 'PATCH',
+      body: {
+        RecipeIDs: payload.RecipeIDs
+      }
+    })
+
+    schedule.value.Recipes = data.Recipes
+  }
+
   async function removeRecipe(payload: ScheduleRecipeInput) {
     await goFetch(`/schedules/${payload.ScheduleID}/recipes`, {
       method: 'DELETE',
       body: {
-        RecipeIDs: [payload.RecipeID]
+        RecipeIDs: payload.RecipeIDs
       }
     })
 
-    const filteredRecipes = schedule.value.Recipes?.filter((recipe) => recipe.ID !== payload.RecipeID) || []
+    const filteredRecipes = schedule.value.Recipes?.filter((recipe) => recipe.ID !== payload.RecipeIDs[0]) || []
     schedule.value.Recipes = filteredRecipes
   }
 
-  return { schedule, schedules, list, get, upsert, remove, addRecipe, removeRecipe }
+  return { schedule, schedules, list, get, upsert, remove, addRecipe, updateRecipes, removeRecipe }
 })
