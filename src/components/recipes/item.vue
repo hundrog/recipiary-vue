@@ -26,13 +26,13 @@ async function removeRecipe() {
 </script>
 
 <template>
-  <Card class="">
+  <Card class="h-96">
     <CardHeader>
-      <img class="mb-2" :src="recipe.ImageUrl" />
+      <img class="mb-2 h-40 object-cover" :src="recipe.ImageUrl" />
       <CardTitle>{{ recipe.Name }}</CardTitle>
       <CardDescription>{{ recipe.Description }}</CardDescription>
     </CardHeader>
-    <CardContent class="flex flex-wrap">
+    <CardContent class="flex flex-wrap mb-6">
       <Badge variant="secondary" v-for="ingredient in recipe.Ingredients" :key="ingredient.ID" class="mt-2 mx-0.5">
         {{ ingredient.Name }}
       </Badge>

@@ -34,13 +34,10 @@ scheduleStore.$subscribe((mutation, state) => {
   <div class="mx-auto grid w-full max-w-screen-xl">
     <LayoutBackButton :route="backTo" justify="end" />
     <Card>
-      <CardHeader class="flex-row justify-between items-center">
-        <div>
-          <CardTitle>From {{ formatDate(String(schedule.StartDate)) }} to {{ formatDate(String(schedule.FinalDate)) }}
-          </CardTitle>
-          <CardDescription>You have {{ schedule?.Recipes?.length }} recipes.</CardDescription>
-        </div>
-        <Button>Add Recipes</Button>
+      <CardHeader>
+        <CardTitle>From {{ formatDate(String(schedule.StartDate)) }} to {{ formatDate(String(schedule.FinalDate)) }}
+        </CardTitle>
+        <CardDescription>You have {{ schedule?.Recipes?.length }} recipes.</CardDescription>
       </CardHeader>
       <CardContent class="">
         <RecipesList :recipes="schedule.Recipes" />
