@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { Moon, Sun, Drumstick, Bell, CircleUser, Menu, Package2, Search } from 'lucide-vue-next'
-import { Badge } from '@/components/ui/badge'
+import { Moon, Drumstick, Bell, CircleUser, Menu, Search } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,12 +22,16 @@ import {
 import { Switch } from '@/components/ui/switch'
 import { useColorMode } from '@vueuse/core'
 import LayoutNavLinks from './navLinks.vue'
+import Session from "supertokens-web-js/recipe/session";
 
 const router = useRouter()
 const colorMode = useColorMode()
 const checked = ref(colorMode.value == 'dark')
 
-const logout = () => router.push('/login')
+async function logout() {
+  await Session.signOut();
+  router.push('/auth')
+}
 
 function handleChange(val: Boolean) {
   val ? (colorMode.value = 'dark') : (colorMode.value = 'light')
