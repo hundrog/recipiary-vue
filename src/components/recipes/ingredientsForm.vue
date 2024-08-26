@@ -39,7 +39,7 @@ function onSubmit() {
     })
   } else {
     recipeIngredientStore.insert({
-      ID: element.value.ID,
+      ID: Number(element.value),
       Name: name.value,
       Amount: parseInt(amount.value),
       RecipeId: recipeId
@@ -70,7 +70,7 @@ function handleChange(item: string) {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectItem v-for="el in elements" :key="el.ID" :value="el.ID?.toString() || ''">
+          <SelectItem v-for="el in elements" :key="el.ID" :value="String(el.ID)">
             {{ el.Name }}
           </SelectItem>
         </SelectGroup>
