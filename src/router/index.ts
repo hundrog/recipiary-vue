@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Index from '@/views/index.vue'
-import Login from '@/views/login.vue'
+import Session from 'supertokens-web-js/recipe/session';
+import HomeView from '@/views/HomeView.vue'
+import AuthView from '../views/AuthView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,12 +9,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: Index
+      component: HomeView
     },
     {
-      path: '/login',
-      name: 'login',
-      component: Login
+      path: "/auth/:pathMatch(.*)*",
+      name: 'auth',
+      component: AuthView
     },
     {
       path: '/about',
@@ -74,6 +75,15 @@ const router = createRouter({
       ]
     },
   ]
+})
+
+
+router.beforeEach(async (to, from) => {
+  const isAuthenticated = await Session.doesSessionExist()
+  if (!isAuthenticated && to.name !== 'auth') {
+    // user has not logged in yet
+    return { name: 'auth' }
+  }
 })
 
 export default router
