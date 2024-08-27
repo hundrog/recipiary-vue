@@ -19,7 +19,6 @@ const loadScript = (src: string) => {
         (window as any).supertokensUIThirdParty.init({
           signInAndUpFeature: {
             providers: [
-              (window as any).supertokensUIThirdParty.Github.init(),
               (window as any).supertokensUIThirdParty.Google.init(),
               (window as any).supertokensUIThirdParty.Facebook.init(),
               (window as any).supertokensUIThirdParty.Apple.init(),
