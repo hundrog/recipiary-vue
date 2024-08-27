@@ -12,6 +12,7 @@ import {
 import LayoutBackButton from '@/components/layout/backButton.vue'
 import { useRoute } from 'vue-router'
 import RecipesList from '@/components/recipes/list.vue'
+import SchedulesRecipesButton from '@/components/schedules/recipesButton.vue'
 import { formatDate } from '@/composables/formatDate'
 
 const route = useRoute()
@@ -23,8 +24,8 @@ onMounted(async () => {
   await scheduleStore.get(scheduleId)
 })
 
-scheduleStore.$subscribe((mutation, state) => {
-  schedule.value = scheduleStore.schedule
+scheduleStore.$subscribe((_, state) => {
+  schedule.value = state.schedule
 })
 </script>
 
@@ -32,10 +33,13 @@ scheduleStore.$subscribe((mutation, state) => {
   <div class="mx-auto grid w-full max-w-screen-xl">
     <LayoutBackButton justify="end" />
     <Card>
-      <CardHeader>
-        <CardTitle>From {{ formatDate(String(schedule.StartDate)) }} to {{ formatDate(String(schedule.FinalDate)) }}
-        </CardTitle>
-        <CardDescription>You have {{ schedule?.Recipes?.length }} recipes.</CardDescription>
+      <CardHeader class="md:flex-row md:justify-between md:space-y-2">
+        <div>
+          <CardTitle>From {{ formatDate(String(schedule.StartDate)) }} to {{ formatDate(String(schedule.FinalDate)) }}
+          </CardTitle>
+          <CardDescription>You have {{ schedule?.Recipes?.length }} recipes.</CardDescription>
+        </div>
+        <SchedulesRecipesButton />
       </CardHeader>
       <CardContent class="">
         <RecipesList :recipes="schedule.Recipes" />

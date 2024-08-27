@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { onMounted } from 'vue'
 import { useDialogStore } from '@/stores/dialog'
 import { useRecipeStore } from '@/stores/recipe'
