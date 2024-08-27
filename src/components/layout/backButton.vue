@@ -2,21 +2,20 @@
 import { CircleArrowLeft } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { computed } from 'vue'
+import { useRouter } from 'vue-router';
 const props = defineProps({
-  route: String,
   justify: String
 })
 
+const router = useRouter()
 const justifyTo = computed(() => `justify-${props.justify}`)
 </script>
 
 <template>
   <div class="flex my-4" :class="[justifyTo]">
-    <Button as-child class="gap-2">
-      <RouterLink :to="String(route ?? '/')">
-        <CircleArrowLeft />
-        Back
-      </RouterLink>
+    <Button class="gap-2" @click="router.back()">
+      <CircleArrowLeft />
+      Back
     </Button>
   </div>
 </template>

@@ -27,14 +27,12 @@ onMounted(async () => {
   await ingredientStore.list()
 })
 
-const backTo = computed(() => recipeId ? `/recipes/${recipeId}` : "/recipes")
-
 const recipe = toRef(recipeStore.recipe)
 </script>
 
 <template>
   <div class="mx-auto max-w-screen-2xl">
-    <LayoutBackButton :route="backTo" justify="end" />
+    <LayoutBackButton justify="end" />
     <Tabs default-value="recipe">
       <TabsList class="grid w-full grid-cols-3">
         <TabsTrigger value="recipe"> Recipe </TabsTrigger>

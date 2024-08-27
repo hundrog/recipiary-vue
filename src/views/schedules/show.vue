@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useScheduleStore, type Schedule } from '@/stores/schedule'
-import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -18,7 +17,6 @@ import { formatDate } from '@/composables/formatDate'
 const route = useRoute()
 const scheduleStore = useScheduleStore()
 const scheduleId = Number(route.params.id)
-const backTo = "/schedules"
 const schedule = ref<Schedule>({})
 
 onMounted(async () => {
@@ -32,7 +30,7 @@ scheduleStore.$subscribe((mutation, state) => {
 
 <template>
   <div class="mx-auto grid w-full max-w-screen-xl">
-    <LayoutBackButton :route="backTo" justify="end" />
+    <LayoutBackButton justify="end" />
     <Card>
       <CardHeader>
         <CardTitle>From {{ formatDate(String(schedule.StartDate)) }} to {{ formatDate(String(schedule.FinalDate)) }}

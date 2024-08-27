@@ -39,7 +39,7 @@ onMounted(async () => {
 
 <template>
   <div class="mx-auto max-w-screen-2xl" v-if="recipe.ID">
-    <LayoutBackButton route="/recipes" justify="end" />
+    <LayoutBackButton justify="end" />
     <Card>
       <CardHeader class="flex flex-col">
         <img class="mb-4 w-full sm:max-w-lg" :src="recipe.ImageUrl" />
